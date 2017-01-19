@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFF</color>
+    <color name="buttonColorStart">#0360F4</color>
+    <color name="buttonColorEnd">#0378F4</color>
+
+    <color name="gradientEndPurpleLogin">#5251d1</color>
+    <color name="gradientStartPurpleLogin">#3c437d</color>
+
+    <color name="purpleButtonStart">#6540f7</color>
+    <color name="purpleButtonEnd">#657af7</color>
+
+    <color name="newTicketLink">#7ea9fd</color>
+</resources>

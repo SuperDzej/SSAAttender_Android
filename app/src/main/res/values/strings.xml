@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SSA Attendance</string>
+    <string name="welcomeMessage">Welcome to Soft Skills Academy Attendance Checker</string>
+    <string name="qrScanner">QR Scanner</string>
+    <string name="checkAttendance">Attendance</string>
+    <string name="other">Add Attender</string>
+    <string name="scan">Scan</string>
+    <string name="backToMain">Back to main</string>
+    <string name="attended">Attended: </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="canNotGetAttendanceInfo">Can not get info about user attendance</string>
+    <string name="back">Back button</string>
+    <string name="invalidData">Data length invalid can not parse values</string>
+    <string name="userAttendingClasses">New user attending classes added</string>
+    <string name="attendanceRecorded">User attendance recorded</string>
+    <string name="scanningCancelled">Scanning cancelled</string>
+    <string name="addUser">Add new user, more users separate with comma</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string translatable="false" name="attendInfoExample">Attendance info per day</string>
+    <string translatable="false" name="attendedExample">1</string>
+    <string translatable="false" name="userNameExample">Dzeral Huit</string>
+
+</resources>

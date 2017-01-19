@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SSA Prisustvo</string>
+    <string name="welcomeMessage">Dobrodosli u Soft Skills Academy provjeru prisustva</string>
+    <string name="qrScanner">QR Citac</string>
+    <string name="checkAttendance">Prisustvo</string>
+    <string name="other">Dodaj Ucesnika</string>
+    <string name="scan">Skeniraj</string>
+    <string name="backToMain">Nazad na glavni</string>
+    <string name="attended">Prisustvovao: </string>
+    <string name="yes">Da</string>
+    <string name="no">Ne</string>
+    <string name="canNotGetAttendanceInfo">Ne mozemo dobiti informacije o prisustvu ucesnika</string>
+    <string name="back">Nazad</string>
+    <string name="invalidData">Velicina podataka nije ispravna nije moguce parsirati</string>
+    <string name="userAttendingClasses">Novi korisnik koji pohadja akademiju dodat</string>
+    <string name="attendanceRecorded">Korisnikovo prisustvo dodato</string>
+    <string name="scanningCancelled">Skeniranje prekinuto</string>
+    <string name="addUser">Dodaj novog korisnika, vise korisnika razdvojiti zarezom</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Prekini</string>
+</resources>
