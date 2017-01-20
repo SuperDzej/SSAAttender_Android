@@ -11,11 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.mrrobot.ssaattendance.Model.NewUserModel;
 import com.example.mrrobot.ssaattendance.R;
 import com.example.mrrobot.ssaattendance.Retrofit.Interface.AttendanceInterface;
 import com.example.mrrobot.ssaattendance.Retrofit.RetrofitApiInstance;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     insertNewUserName = input.getText().toString();
-                    Log.d("MainActivity"+82, insertNewUserName);
-                    //registerNewUserAttending(insertNewUserName);
+                    qrScanner.setEnabled(false);
+                    checkAttendance.setEnabled(false);
+                    other.setEnabled(false);
+
+                    registerNewUserAttending(insertNewUserName);
                 }
             });
             builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -106,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(), result.getContents(), Toast.LENGTH_LONG).show();
                 scannedUserName = result.getContents();
-                //sendUserAttendanceInfo(scannedUserName);
+                sendUserAttendanceInfo(scannedUserName);
             }
         }else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -142,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     private  void registerNewUserAttending(String userName){
         AttendanceInterface loginUser = RetrofitApiInstance.getRetrofit().create(AttendanceInterface.class);
         final Call<String> call =
-                loginUser.insertNewUser(userName);
+                loginUser.insertNewUser("application/json",new NewUserModel(userName));
 
         call.enqueue(new Callback<String>() {
             @Override
@@ -153,11 +160,27 @@ public class MainActivity extends AppCompatActivity {
                     if(result != null){
                         Toast.makeText(getApplicationContext(),
                                 getResources().getString(R.string.userAttendingClasses), Toast.LENGTH_LONG).show();
+                        qrScanner.setEnabled(true);
+                        checkAttendance.setEnabled(true);
+                        other.setEnabled(true);
                     }
+                }
+                else {
+                    try {
+                        Log.d("MainActivity"+168, response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    qrScanner.setEnabled(true);
+                    checkAttendance.setEnabled(true);
+                    other.setEnabled(true);
                 }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                qrScanner.setEnabled(true);
+                checkAttendance.setEnabled(true);
+                other.setEnabled(true);
                 Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.canNotGetAttendanceInfo), Toast.LENGTH_LONG).show();
             }

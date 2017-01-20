@@ -24,7 +24,7 @@ public class RetrofitApiInstance {
         if(retrofit == null){
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             // set your desired log level
-            logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             final OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
                     .readTimeout(20, TimeUnit.SECONDS)
@@ -38,7 +38,7 @@ public class RetrofitApiInstance {
                     .create();
 
             return  new Retrofit.Builder()
-                    .baseUrl("https://api.myjson.com/")
+                    .baseUrl("https://ssaattenderapi.azurewebsites.net/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();
