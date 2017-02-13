@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by MrRobot on 1/14/2017.
  *
- * Adapter responsible to handler data for attendance list view
+ * Adapter responsible to handler data for attendance list view, in check attendance xml for list
  */
 
 public class AttendanceAdapter extends BaseAdapter {

@@ -29,8 +29,9 @@ public interface AttendanceInterface {
             @Body NewUserModel userName
     );
 
-    @GET("api/Attendance/{userName}")
-    Call<String> sendAttendanceInfo(
-            @Path("userName") String userName
+    @GET("api/Attendance/{userName}/{training}")
+    Call<Void> sendAttendanceInfo(
+            @Path("userName") String userName,
+            @Path("training") String training
     );
 }

@@ -35,7 +35,6 @@ import retrofit2.Response;
 
 public class CheckAttendance extends Activity {
     ListView attendanceList;
-    ImageView backToMain;
     ArrayList<AttendanceModel> attendances = new ArrayList<>();
 
     @Override
@@ -45,20 +44,11 @@ public class CheckAttendance extends Activity {
 
         getAttendanceInfo();
 
-        backToMain = (ImageView) findViewById(R.id.backToMainActivity);
         //attendances = generateAttendance();
 
         attendanceList = (ListView) findViewById(R.id.attendanceList);
         setAdapter(attendances);
         attendanceList.setOnItemClickListener(attendanceRowClicked);
-
-        backToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CheckAttendance.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     AdapterView.OnItemClickListener attendanceRowClicked = new AdapterView.OnItemClickListener() {
@@ -114,8 +104,9 @@ public class CheckAttendance extends Activity {
                 return false;
 
             for(int i = 0;i < model.getDaysAttended().size();i++){
-                keyValueModels.add(new KeyValueModel(model.getDaysAttended().get(i),
-                        model.getDidAttended().get(i)));
+                keyValueModels.add(new KeyValueModel(model.getDaysAttended() != null ? model.getDaysAttended().get(i):0,
+                        model.getDidAttended()  != null ? model.getDidAttended().get(i):false,
+                        model.getTrainingAttended()  != null ? model.getTrainingAttended().get(i):"No data"));
             }
             //Setting all values
             attendanceModel.setDaysAttended(keyValueModels);
@@ -128,35 +119,10 @@ public class CheckAttendance extends Activity {
         return true;
     }
 
-    private ArrayList<AttendanceModel> generateAttendance(){
-        /*ArrayList<AttendanceModel> attendances = new ArrayList<>();
-        Long day1 = Calendar.getInstance().getTimeInMillis();
-        Long day2 = Calendar.getInstance().getTimeInMillis();
-        Long day3 = Calendar.getInstance().getTimeInMillis();
-        Long day4 = Calendar.getInstance().getTimeInMillis();
-
-        Boolean attended1 = true;
-        Boolean attended2 = false;
-        Boolean attended3 = true;
-        Boolean attended4 = true;
-
-        ArrayList<KeyValueModel> allAttendance1 = new ArrayList<>();
-        allAttendance1.add(new KeyValueModel(day1,attended1));
-        allAttendance1.add(new KeyValueModel(day2,attended2));
-        allAttendance1.add(new KeyValueModel(day3,attended3));
-
-        ArrayList<KeyValueModel> allAttendance2 = new ArrayList<>();
-        allAttendance2.add(new KeyValueModel(day1,attended1));
-        allAttendance2.add(new KeyValueModel(day2,attended2));
-        allAttendance2.add(new KeyValueModel(day3,attended3));
-        allAttendance2.add(new KeyValueModel(day4,attended4));
-
-        attendances.add(new AttendanceModel("Dzejson Megrao", 2, allAttendance1));
-        attendances.add(new AttendanceModel("Ismar Music", 2, allAttendance1));
-        attendances.add(new AttendanceModel("Dzoni Simic", 2, allAttendance1));
-        attendances.add(new AttendanceModel("Nejra Muhic", 3, allAttendance2));
-        attendances.add(new AttendanceModel("Rijad Dizdarevic", 3, allAttendance2));
-        return attendances;*/
-        return null;
+    @Override
+    public  void onBackPressed(){
+        super.onBackPressed();
+        Intent i = new Intent(CheckAttendance.this, MainActivity.class);
+        startActivity(i);
     }
 }

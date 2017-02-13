@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.mrrobot.ssaattendance.Model.NewUserModel;
 import com.example.mrrobot.ssaattendance.R;
 import com.example.mrrobot.ssaattendance.Retrofit.Interface.AttendanceInterface;
@@ -19,6 +21,7 @@ import com.example.mrrobot.ssaattendance.Retrofit.RetrofitApiInstance;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         qrScanner = (Button) findViewById(R.id.scanQR);
@@ -47,13 +51,8 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener qrScannerClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-            integrator.setPrompt(getResources().getString(R.string.scan));
-            integrator.setCameraId(0);
-            integrator.setBeepEnabled(false);
-            integrator.setBarcodeImageEnabled(false);
-            integrator.initiateScan();
+            Intent i = new Intent(MainActivity.this, QRScannerActivity.class);
+            startActivity(i);
         }
     };
 
@@ -83,9 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     insertNewUserName = input.getText().toString();
-                    qrScanner.setEnabled(false);
-                    checkAttendance.setEnabled(false);
-                    other.setEnabled(false);
+                    disableButtons();
 
                     registerNewUserAttending(insertNewUserName);
                 }
@@ -101,51 +98,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents() == null){
-                Toast.makeText(getApplicationContext(),
-                        getResources().getString(R.string.scanningCancelled), Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(), result.getContents(), Toast.LENGTH_LONG).show();
-                scannedUserName = result.getContents();
-                sendUserAttendanceInfo(scannedUserName);
-            }
-        }else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-
-    }
-
-    private  void sendUserAttendanceInfo(String userName){
-        AttendanceInterface loginUser = RetrofitApiInstance.getRetrofit().create(AttendanceInterface.class);
-        final Call<String> call =
-                loginUser.sendAttendanceInfo(userName);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.code() == 200)
-                {
-                    String result = response.body();
-                    if(result != null){
-                        Toast.makeText(getApplicationContext(),
-                                getResources().getString(R.string.attendanceRecorded), Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),
-                        getResources().getString(R.string.canNotGetAttendanceInfo), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     private  void registerNewUserAttending(String userName){
         AttendanceInterface loginUser = RetrofitApiInstance.getRetrofit().create(AttendanceInterface.class);
         final Call<String> call =
@@ -156,14 +108,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 200)
                 {
-                    String result = response.body();
-                    if(result != null){
                         Toast.makeText(getApplicationContext(),
                                 getResources().getString(R.string.userAttendingClasses), Toast.LENGTH_LONG).show();
-                        qrScanner.setEnabled(true);
-                        checkAttendance.setEnabled(true);
-                        other.setEnabled(true);
-                    }
+                    enableButtons();
                 }
                 else {
                     try {
@@ -171,19 +118,27 @@ public class MainActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    qrScanner.setEnabled(true);
-                    checkAttendance.setEnabled(true);
-                    other.setEnabled(true);
+                    enableButtons();
                 }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                qrScanner.setEnabled(true);
-                checkAttendance.setEnabled(true);
-                other.setEnabled(true);
+                enableButtons();
                 Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.canNotGetAttendanceInfo), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void enableButtons(){
+        qrScanner.setEnabled(true);
+        checkAttendance.setEnabled(true);
+        other.setEnabled(true);
+    }
+
+    private void disableButtons(){
+        qrScanner.setEnabled(false);
+        checkAttendance.setEnabled(false);
+        other.setEnabled(false);
     }
 }

@@ -18,8 +18,8 @@
     <string name="addUser">Add new user, more users separate with comma</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="attendInfoExample">Attendance info per day</string>
 
-    <string translatable="false" name="attendInfoExample">Attendance info per day</string>
     <string translatable="false" name="attendedExample">1</string>
     <string translatable="false" name="userNameExample">Dzeral Huit</string>
 

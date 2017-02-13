@@ -14,21 +14,25 @@ import java.util.Calendar;
 public class KeyValueModel implements Parcelable {
     private Long key;
     private Boolean value;
+    private String training;
 
     public KeyValueModel(){
         key = 1484487333563L;
         value = false;
+        training = "";
     }
 
-    public KeyValueModel(Long key, Boolean value){
+    public KeyValueModel(Long key, Boolean value, String training){
         this.key = key;
         this.value = value;
+        this.training = training;
     }
 
     public void setKey(Long t) { this.key = t; }
     public Long getKey() { return key; }
     public void setValue(Boolean value){this.value = value;}
     public Boolean getValue(){return  value;}
+    public String getTraining(){return  training;}
 
     @Override
     public int describeContents() {
@@ -53,6 +57,7 @@ public class KeyValueModel implements Parcelable {
             parcel.writeInt(1);
         else
             parcel.writeInt(0);
+        parcel.writeString(training);
     }
 
     // example constructor that takes a Parcel and gives you an object populated with it's values
@@ -60,5 +65,6 @@ public class KeyValueModel implements Parcelable {
         key = in.readLong();
         int i = in.readInt();
         value = i == 1;
+        training = in.readString();
     }
 }

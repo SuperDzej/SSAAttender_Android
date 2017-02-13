@@ -7,11 +7,11 @@
     <color name="buttonColorStart">#0360F4</color>
     <color name="buttonColorEnd">#0378F4</color>
 
-    <color name="gradientEndPurpleLogin">#5251d1</color>
-    <color name="gradientStartPurpleLogin">#3c437d</color>
+    <color name="gradientEndPurpleLogin">#1aa79e</color>
+    <color name="gradientStartPurpleLogin">#09756e</color>
 
-    <color name="purpleButtonStart">#6540f7</color>
-    <color name="purpleButtonEnd">#657af7</color>
+    <color name="purpleButtonStart">#1aa79e</color>
+    <color name="purpleButtonEnd">#09a197</color>
 
-    <color name="newTicketLink">#7ea9fd</color>
+    <color name="newTicketLink">#09756e</color>
 </resources>

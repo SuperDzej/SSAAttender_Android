@@ -23,20 +23,24 @@ public class AttendanceApiModel implements Parcelable {
     private List<Long> daysAttendedInfo = new ArrayList<>();
     @SerializedName("daysDidAttend")
     private List<Boolean> didAttended = new ArrayList<>();
+    @SerializedName("trainingAttended")
+    private List<String> trainingAttended = new ArrayList<>();
 
     public AttendanceApiModel(){
         userName = "";
         numberOfAttendance = -1;
         daysAttendedInfo = new ArrayList<>();
         didAttended = new ArrayList<>();
+        trainingAttended = new ArrayList<>();
     }
 
     public AttendanceApiModel(String userName, int numAttendance,
-                           ArrayList<Long> daysAttended, ArrayList<Boolean> didAttended){
+                           ArrayList<Long> daysAttended, ArrayList<Boolean> didAttended, ArrayList<String> training){
         this.userName = userName;
         this.numberOfAttendance = numAttendance;
         this.daysAttendedInfo = daysAttended;
         this.didAttended = didAttended;
+        this.trainingAttended = training;
     }
 
     public String getUserName(){
@@ -55,6 +59,10 @@ public class AttendanceApiModel implements Parcelable {
         return didAttended;
     }
 
+    public List<String> getTrainingAttended(){
+        return trainingAttended;
+    }
+
     public void setUserName(String userName){
         this.userName = userName;
     }
@@ -71,6 +79,10 @@ public class AttendanceApiModel implements Parcelable {
         this.didAttended = daysAttended;
     }
 
+    public void setTrainingAttended(ArrayList<String> daysAttended){
+        this.trainingAttended = daysAttended;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -82,6 +94,7 @@ public class AttendanceApiModel implements Parcelable {
         parcel.writeInt(numberOfAttendance);
         parcel.writeList(daysAttendedInfo);
         parcel.writeList(didAttended);
+        parcel.writeList(trainingAttended);
     }
 
     // this is used to regenerate your object. All AttendanceApiModel must have a CREATOR that implements these two methods
@@ -101,6 +114,7 @@ public class AttendanceApiModel implements Parcelable {
         numberOfAttendance = in.readInt();
         in.readList(daysAttendedInfo, Long.class.getClassLoader());
         in.readList(didAttended, Boolean.class.getClassLoader());
+        in.readList(trainingAttended, String.class.getClassLoader());
     }
 
     @Override

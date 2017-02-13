@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.mrrobot.ssaattendance.Model.AttendanceModel;
 import com.example.mrrobot.ssaattendance.Model.KeyValueModel;
 import com.example.mrrobot.ssaattendance.R;
+import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +59,7 @@ public class DaysAttendedAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         View vi = convertView;
         if (vi == null) {
-            vi = inflater.inflate(R.layout.attendance_list_row, null);
+            vi = inflater.inflate(R.layout.user_attendance_row, null);
         }
 
         List<KeyValueModel> allAttendance
@@ -86,6 +87,8 @@ public class DaysAttendedAdapter extends BaseAdapter {
             } else {
                 numAttendance.setText(context.getResources().getString(R.string.no));
             }
+            TextView trainingAttended = (TextView)vi.findViewById(R.id.trainingAttended);
+            trainingAttended.setText(attendanceInfo.getTraining());
         }
 
         return vi;

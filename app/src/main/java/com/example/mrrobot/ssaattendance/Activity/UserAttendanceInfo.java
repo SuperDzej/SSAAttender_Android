@@ -28,7 +28,6 @@ public class UserAttendanceInfo extends Activity {
     ListView attendancePerDay;
     AttendanceModel attendance;
     TextView userName, numAttended;
-    ImageView backToCheck;
 
     @Override
     protected void onCreate(Bundle bundle){
@@ -47,15 +46,6 @@ public class UserAttendanceInfo extends Activity {
         userName.setText(attendance.getUserName());
         String attended = getResources().getString(R.string.attended) +"  " + attendance.getNumberOfAttendance();
         numAttended.setText(attended);
-
-        backToCheck = (ImageView)findViewById(R.id.backToCheckAttendance);
-        backToCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserAttendanceInfo.this, CheckAttendance.class);
-                startActivity(intent);
-            }
-        });
     }
 
     AdapterView.OnItemClickListener attendanceRowClicked = new AdapterView.OnItemClickListener() {
@@ -72,4 +62,11 @@ public class UserAttendanceInfo extends Activity {
             Toast.makeText(getApplicationContext(), timeDescription, Toast.LENGTH_LONG).show();
         }
     };
+
+    @Override
+    public  void onBackPressed(){
+        super.onBackPressed();
+        Intent i = new Intent(UserAttendanceInfo.this, CheckAttendance.class);
+        startActivity(i);
+    }
 }
