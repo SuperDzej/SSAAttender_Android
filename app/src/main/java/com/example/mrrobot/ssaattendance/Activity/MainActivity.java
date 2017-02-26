@@ -29,8 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    Button qrScanner, checkAttendance, other;
-    String scannedUserName;
+    Button qrScanner, checkAttendance;
     private String insertNewUserName = "";
 
     @Override
@@ -41,11 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         qrScanner = (Button) findViewById(R.id.scanQR);
         checkAttendance = (Button) findViewById(R.id.checkAttendance);
-        other = (Button)findViewById(R.id.other);
 
         qrScanner.setOnClickListener(qrScannerClicked);
         checkAttendance.setOnClickListener(checkAttendanceClicked);
-        other.setOnClickListener(otherClicked);
     }
 
     View.OnClickListener qrScannerClicked = new View.OnClickListener() {
@@ -133,12 +130,10 @@ public class MainActivity extends AppCompatActivity {
     private void enableButtons(){
         qrScanner.setEnabled(true);
         checkAttendance.setEnabled(true);
-        other.setEnabled(true);
     }
 
     private void disableButtons(){
         qrScanner.setEnabled(false);
         checkAttendance.setEnabled(false);
-        other.setEnabled(false);
     }
 }

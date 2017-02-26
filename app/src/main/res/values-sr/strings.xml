@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SSA Prisustvo</string>
-    <string name="welcomeMessage">Dobrodosli u Soft Skills Academy provjeru prisustva</string>
+    <string name="welcomeMessage">Dobrodosli u Soft Skills Academy Sarajevo provjeru prisustva</string>
     <string name="qrScanner">QR Citac</string>
     <string name="checkAttendance">Prisustvo</string>
     <string name="other">Dodaj Ucesnika</string>
@@ -20,4 +20,5 @@
     <string name="ok">OK</string>
     <string name="cancel">Prekini</string>
     <string name="attendInfoExample">Info o prisustvu po danima</string>
+    <string name="noAttendanceRegistered">Nema zabiljezenih prisustva u aplikaciji</string>
 </resources>

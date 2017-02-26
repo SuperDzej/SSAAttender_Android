@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.mrrobot.ssaattendance.Adapters.AttendanceAdapter;
 import com.example.mrrobot.ssaattendance.Model.AttendanceApiModel;
@@ -36,7 +37,7 @@ import retrofit2.Response;
 public class CheckAttendance extends Activity {
     ListView attendanceList;
     ArrayList<AttendanceModel> attendances = new ArrayList<>();
-
+    TextView noAttendanceReg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class CheckAttendance extends Activity {
         attendanceList = (ListView) findViewById(R.id.attendanceList);
         setAdapter(attendances);
         attendanceList.setOnItemClickListener(attendanceRowClicked);
+        noAttendanceReg = (TextView)findViewById(R.id.noAttendanceReg);
     }
 
     AdapterView.OnItemClickListener attendanceRowClicked = new AdapterView.OnItemClickListener() {
@@ -79,6 +81,9 @@ public class CheckAttendance extends Activity {
                             Toast.makeText(getApplicationContext(),
                                     getResources().getString(R.string.invalidData), Toast.LENGTH_LONG).show();
                         }
+                    }
+                    else{
+                        noAttendanceReg.setVisibility(View.VISIBLE);
                     }
                 }
             }
