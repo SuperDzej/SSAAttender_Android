@@ -20,6 +20,7 @@
     <string name="cancel">Cancel</string>
     <string name="attendInfoExample">Attendance info per day</string>
     <string name="noAttendanceRegistered">No attendance registered on server</string>
+    <string name="pickTraining">Pick training</string>
 
     <string translatable="false" name="attendedExample">1</string>
     <string translatable="false" name="userNameExample">Dzeral Huit</string>

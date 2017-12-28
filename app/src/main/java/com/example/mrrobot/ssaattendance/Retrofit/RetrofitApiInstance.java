@@ -38,7 +38,7 @@ public class RetrofitApiInstance {
                     .create();
 
             return  new Retrofit.Builder()
-                    .baseUrl("https://ssaattenderapi.azurewebsites.net/")
+                    .baseUrl("https://ssaattenderap.azurewebsites.net/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(okHttpClient)
                     .build();

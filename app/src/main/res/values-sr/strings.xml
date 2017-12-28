@@ -21,4 +21,5 @@
     <string name="cancel">Prekini</string>
     <string name="attendInfoExample">Info o prisustvu po danima</string>
     <string name="noAttendanceRegistered">Nema zabiljezenih prisustva u aplikaciji</string>
+    <string name="pickTraining">Izaberite trening</string>
 </resources>

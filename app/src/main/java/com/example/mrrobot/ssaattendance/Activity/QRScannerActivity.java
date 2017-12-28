@@ -40,11 +40,11 @@ public class QRScannerActivity extends AppCompatActivity {
         setContentView(R.layout.qr_scanner);
 
         qrScanner = (Button) findViewById(R.id.scanQRCode);
-
         qrScanner.setOnClickListener(qrScannerClicked);
+
         trainingList = (Spinner)findViewById(R.id.trainingList);
         this.arraySpinner = new String[] {
-                "Trening 1", "Trening 2", "Trening 3", "Trening 4", "Trening 5", "Trening 6"
+                "Time Management", "Leadership", "Motivation", "Stress Management", "Meetings", "Friendship bridge"
         };
         trainingSelected = arraySpinner[0];
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -55,7 +55,7 @@ public class QRScannerActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 trainingSelected = arraySpinner[position];
-                Log.d("QRScannerActivity"+61, trainingSelected);
+                Log.d("QRScannerActivity"+58, trainingSelected);
             }
 
             @Override
